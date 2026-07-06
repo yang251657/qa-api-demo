@@ -1,19 +1,17 @@
 import os
 from dotenv import load_dotenv
 
-load_dotenv()  # 读取根目录的 .env 文件
+current_env = os.getenv("ENV", "test1")   # 默认用 test1
 
-BASE_URL = "https://reqres.in/api"
+env_file = f".env.{current_env}"
+load_dotenv(env_file)
+
+BASE_URL = os.getenv("BASE_URL")
 API_KEY = os.getenv("API_KEY")
-
-
-#  api key是请求头里得key  确保访问服务器
-# 配置（URL / ENV / TOKEN）
 
 DEFAULT_HEADERS = {
     "Content-Type": "application/json",
     "x-api-key": API_KEY,
 }
-
 
 DEFAULT_TIMEOUT = 10
