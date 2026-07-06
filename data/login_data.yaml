@@ -1,0 +1,14 @@
+- case_name: login_success
+  email: eve.holt@reqres.in
+  password: cityslicka
+  expected_status: 200
+
+- case_name: login_missing_password
+  email: eve.holt@reqres.in
+  password: ""
+  expected_status: 400
+
+- case_name: login_wrong_email_format
+  email: not-an-email
+  password: cityslicka
+  expected_status: 400
