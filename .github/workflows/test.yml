@@ -49,10 +49,16 @@ jobs:
     #       echo "API_KEY=${{ matrix.environment == 'test1' && secrets.TEST1_API_KEY || secrets.TEST2_API_KEY }}" >> .env.${{ matrix.environment }}
 
 
+    #   - name: 运行测试并生成报告
+    #     env:
+    #       API_KEY: ${{ secrets.API_KEY }}
+    #     run: pytest -v --html=reports/report.html --self-contained-html
+
       - name: 运行测试并生成报告
         env:
-          API_KEY: ${{ secrets.API_KEY }}
-        run: pytest -v --html=reports/report.html --self-contained-html
+          ENV: ${{ matrix.environment }}
+        run: pytest -v --html=reports/report-${{ matrix.environment }}.html --self-contained-html
+
 
       - name: 上传测试报告
         if: always()
