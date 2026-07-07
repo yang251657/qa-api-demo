@@ -59,13 +59,19 @@ jobs:
           ENV: ${{ matrix.environment }}
         run: pytest -v --html=reports/report-${{ matrix.environment }}.html --self-contained-html
 
-
       - name: 上传测试报告
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: test-report
-          path: reports/report.html
+          name: test-report-${{ matrix.environment }}
+          path: reports/report-${{ matrix.environment }}.html 
+
+      # - name: 上传测试报告
+      #   if: always()
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: test-report
+      #     path: reports/report.html
 
     #   - name: 运行测试
     #     env:
