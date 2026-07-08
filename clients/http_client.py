@@ -12,6 +12,7 @@ HTTP客户端基础封装。
 import requests
 from config.settings import DEFAULT_HEADERS, DEFAULT_TIMEOUT
 from utils.logger import get_logger
+from utils.response import ResponseWrapper
 
 logger = get_logger(__name__)
 
@@ -37,7 +38,7 @@ class HttpClient:
         logger.info(f"请求 -> POST {url} | payload={json}")
         response = requests.post(url, json=json, headers=self.headers, timeout=self.timeout)
         logger.info(f"响应 <- {response.status_code} | body={response.text}")
-        return response
+        return ResponseWrapper(response)
 
     # def get(self, path: str, params: dict = None):
     #     url = self._full_url(path)
@@ -52,4 +53,4 @@ class HttpClient:
         logger.info(f"请求 -> GET {url} | params={params}")
         response = requests.get(url, params=params, headers=headers, timeout=self.timeout)
         logger.info(f"响应 <- {response.status_code} | body={response.text}")
-        return response
+        return ResponseWrapper(response)
