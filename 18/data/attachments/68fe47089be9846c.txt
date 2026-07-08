@@ -1,2 +1,0 @@
-2026-07-08 04:22:11 [INFO] 请求 -> GET https://reqres.in/api/users/9999 | params=None
-2026-07-08 04:22:11 [INFO] 响应 <- 404 | body={}

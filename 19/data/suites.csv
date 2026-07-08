@@ -1,0 +1,8 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"验证创建的客户信息正确，数据由temp_customer fixture自动创建和清理","0","test_create_and_verify_customer","tests","2026-07-08","passed","2026-07-08","","test_customer","",""
+"","382","test_get_customer_scenarios[get_nonexistent_customer]","tests","2026-07-08","passed","2026-07-08","","test_customer","",""
+"","366","test_login_scenarios[login_success]","tests","2026-07-08","passed","2026-07-08","","test_login","",""
+"","219","test_get_customer_with_expired_token_auto_retry","tests","2026-07-08","passed","2026-07-08","","test_customer","",""
+"","384","test_get_customer_scenarios[get_existing_customer]","tests","2026-07-08","passed","2026-07-08","","test_customer","",""
+"","201","test_login_scenarios[login_missing_password]","tests","2026-07-08","passed","2026-07-08","","test_login","",""
+"","364","test_get_customer_list","tests","2026-07-08","passed","2026-07-08","","test_customer","",""
