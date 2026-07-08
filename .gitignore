@@ -6,3 +6,5 @@ __pycache__/
 .env.test2
 *.pyc
 reports/
+allure-results/
+allure-report/

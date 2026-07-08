@@ -1,0 +1,2 @@
+[32mINFO    [0m clients.http_client:http_client.py:45 请求 -> GET https://reqres.in/api/users/9999 | params=None
+[32mINFO    [0m clients.http_client:http_client.py:47 响应 <- 404 | body={}
