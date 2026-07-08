@@ -14,6 +14,12 @@ class HttpClient:
 
     def _full_url(self, path: str) -> str:
         return f"{self.base_url}{path}"
+    
+    def _merge_headers(self, extra_headers: dict = None):
+        merged = dict(self.headers)
+        if extra_headers:
+            merged.update(extra_headers)
+        return merged
 
     def post(self, path: str, json: dict = None):
         url = self._full_url(path)
@@ -22,9 +28,17 @@ class HttpClient:
         logger.info(f"响应 <- {response.status_code} | body={response.text}")
         return response
 
-    def get(self, path: str, params: dict = None):
+    # def get(self, path: str, params: dict = None):
+    #     url = self._full_url(path)
+    #     logger.info(f"请求 -> GET {url} | params={params}")
+    #     response = requests.get(url, params=params, headers=self.headers, timeout=self.timeout)
+    #     logger.info(f"响应 <- {response.status_code} | body={response.text}")
+    #     return response
+    
+    def get(self, path: str, params: dict = None, extra_headers: dict = None):
         url = self._full_url(path)
+        headers = self._merge_headers(extra_headers)
         logger.info(f"请求 -> GET {url} | params={params}")
-        response = requests.get(url, params=params, headers=self.headers, timeout=self.timeout)
+        response = requests.get(url, params=params, headers=headers, timeout=self.timeout)
         logger.info(f"响应 <- {response.status_code} | body={response.text}")
         return response
