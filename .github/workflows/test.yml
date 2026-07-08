@@ -39,11 +39,55 @@ jobs:
       - name: 运行测试并生成报告
         env:
           ENV: ${{ matrix.environment }}
-        run: pytest -v --html=reports/report-${{ matrix.environment }}.html --self-contained-html
+        run: |
+          pytest -v --html=reports/report-${{ matrix.environment }}.html --self-contained-html \
+            --alluredir=allure-results-${{ matrix.environment }}
 
-      - name: 上传测试报告
+      - name: 上传pytest-html报告
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: test-report-${{ matrix.environment }}
           path: reports/report-${{ matrix.environment }}.html
+
+      - name: 上传Allure原始数据(供后续统一发布使用)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-results-${{ matrix.environment }}
+          path: allure-results-${{ matrix.environment }}
+
+  publish-allure-report:
+    needs: test
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: 拉取代码
+        uses: actions/checkout@v4
+
+      - name: 下载test1的Allure数据
+        uses: actions/download-artifact@v4
+        with:
+          name: allure-results-test1
+          path: allure-results-test1
+
+      - name: 下载test2的Allure数据
+        uses: actions/download-artifact@v4
+        with:
+          name: allure-results-test2
+          path: allure-results-test2
+
+      - name: 生成Allure可视化报告(合并两个环境)
+        uses: simple-elf/allure-report-action@master
+        with:
+          allure_results: allure-results-test1
+          allure_report: allure-report
+          allure_history: allure-history
+          keep_reports: 20
+
+      - name: 发布Allure报告到GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: allure-history
