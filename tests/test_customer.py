@@ -1,6 +1,8 @@
 import pytest
 from services.customer_service import CustomerService
-from conftest import load_cases_by_module
+from utils.data_loader import load_cases_by_module   # ← 改这一行
+
+
 
 customer_cases = load_cases_by_module("test_data.yaml", "customer")
 

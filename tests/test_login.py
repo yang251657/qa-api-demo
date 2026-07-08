@@ -1,8 +1,6 @@
-# import sys
-# import os
 import pytest
 from utils.assertions import assert_status_code, assert_json_has_keys
-from conftest import load_cases_by_module
+from utils.data_loader import load_cases_by_module   
 
 
 login_cases = load_cases_by_module("test_data.yaml", "login")

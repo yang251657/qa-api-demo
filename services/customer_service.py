@@ -18,21 +18,25 @@ class CustomerService:
         return {"Authorization": f"Bearer {self.token}"} if self.token else {}
 
     def _refresh_token(self):
+        """token失效时，重新登录拿新token"""
         auth = AuthService()
         response = auth.login("eve.holt@reqres.in", "cityslicka")
         self.token = response.json().get("token")
 
-    def _get_with_retry(self, path, params=None):
-        response = self.client.get(path, params=params, extra_headers=self._auth_headers())
+    def get_customer(self, customer_id):
+        response = self.client.get(f"/users/{customer_id}", extra_headers=self._auth_headers())
 
         if response.status_code == 401:
             self._refresh_token()
-            response = self.client.get(path, params=params, extra_headers=self._auth_headers())
+            response = self.client.get(f"/users/{customer_id}", extra_headers=self._auth_headers())
 
         return response
 
-    def get_customer(self, customer_id):
-        return self._get_with_retry(f"/users/{customer_id}")
-
     def get_customer_list(self, page=1):
-        return self._get_with_retry("/users", params={"page": page})
+        response = self.client.get("/users", params={"page": page}, extra_headers=self._auth_headers())
+
+        if response.status_code == 401:
+            self._refresh_token()
+            response = self.client.get("/users", params={"page": page}, extra_headers=self._auth_headers())
+
+        return response
