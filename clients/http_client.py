@@ -25,24 +25,28 @@ class HttpClient:
             merged.update(extra_headers)
         return merged
 
-    def post(self, path: str, json: dict = None):
+    def post(self, path: str, json: dict = None, extra_headers: dict = None):
         url = self._full_url(path)
+        headers = self._merge_headers(extra_headers)
         logger.info(f"请求 -> POST {url} | payload={json}")
-        response = requests.post(url, json=json, headers=self.headers, timeout=self.timeout)
+        response = requests.post(url, json=json, headers=headers, timeout=self.timeout)
         logger.info(f"响应 <- {response.status_code} | body={response.text}")
         return ResponseWrapper(response)
 
-    # def get(self, path: str, params: dict = None):
-    #     url = self._full_url(path)
-    #     logger.info(f"请求 -> GET {url} | params={params}")
-    #     response = requests.get(url, params=params, headers=self.headers, timeout=self.timeout)
-    #     logger.info(f"响应 <- {response.status_code} | body={response.text}")
-    #     return response
     
     def get(self, path: str, params: dict = None, extra_headers: dict = None):
         url = self._full_url(path)
         headers = self._merge_headers(extra_headers)
         logger.info(f"请求 -> GET {url} | params={params}")
         response = requests.get(url, params=params, headers=headers, timeout=self.timeout)
+        logger.info(f"响应 <- {response.status_code} | body={response.text}")
+        return ResponseWrapper(response)
+    
+
+    def delete(self, path: str, extra_headers: dict = None):
+        url = self._full_url(path)
+        headers = self._merge_headers(extra_headers)
+        logger.info(f"请求 -> DELETE {url}")
+        response = requests.delete(url, headers=headers, timeout=self.timeout)
         logger.info(f"响应 <- {response.status_code} | body={response.text}")
         return ResponseWrapper(response)

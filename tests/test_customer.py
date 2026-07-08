@@ -68,4 +68,11 @@ def test_get_customer_with_expired_token_auto_retry():
         expected_status=200
     )
 
+
+def test_create_and_verify_customer(temp_customer, customer_service):
+    """验证创建的客户信息正确，数据由temp_customer fixture自动创建和清理"""
+    assert temp_customer["id"] is not None
+    assert "test_customer_" in temp_customer["name"]
+
+
     
