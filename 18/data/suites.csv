@@ -1,0 +1,7 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","47","test_get_customer_with_expired_token_auto_retry","tests","2026-07-08","passed","2026-07-08","","test_customer","",""
+"","193","test_login_scenarios[login_missing_password]","tests","2026-07-08","passed","2026-07-08","","test_login","",""
+"","199","test_get_customer_list","tests","2026-07-08","passed","2026-07-08","","test_customer","",""
+"","207","test_get_customer_scenarios[get_nonexistent_customer]","tests","2026-07-08","passed","2026-07-08","","test_customer","",""
+"","192","test_login_scenarios[login_success]","tests","2026-07-08","passed","2026-07-08","","test_login","",""
+"","80","test_get_customer_scenarios[get_existing_customer]","tests","2026-07-08","passed","2026-07-08","","test_customer","",""
