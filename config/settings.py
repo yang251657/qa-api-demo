@@ -1,3 +1,15 @@
+"""
+项目全局配置文件。
+
+支持多环境切换：通过系统环境变量 ENV 决定读取哪一份 .env 文件
+(例如 ENV=test1 时读取 .env.test1)。默认使用 test1 环境。
+
+用法：
+    Windows PowerShell:  $env:ENV="test2"; pytest
+    Linux/Mac:           ENV=test2 pytest
+"""
+
+
 import os
 from dotenv import load_dotenv
 

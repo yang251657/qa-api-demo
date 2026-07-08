@@ -36,3 +36,11 @@ def load_yaml_data(filename: str):
     with open(path, "r", encoding="utf-8") as f:
         return yaml.safe_load(f)
     
+
+def load_cases_by_module(filename: str, module: str):
+    """
+    从统一的test_data.yaml里，按module筛选出属于某个业务模块的用例数据
+    """
+    all_data = load_yaml_data(filename)
+    all_cases = all_data["cases"]
+    return [case for case in all_cases if case["module"] == module]

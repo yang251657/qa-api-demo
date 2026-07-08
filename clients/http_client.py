@@ -1,3 +1,14 @@
+"""
+HTTP客户端基础封装。
+
+职责单一：只负责"怎么发HTTP请求"这一层技术细节
+(拼URL、加公共headers、超时控制、请求/响应日志)，
+不掺杂任何业务逻辑。所有service层都通过这个类发请求，
+以后要加重试、限流等机制，只需要改这一个文件。
+"""
+
+
+
 import requests
 from config.settings import DEFAULT_HEADERS, DEFAULT_TIMEOUT
 from utils.logger import get_logger
