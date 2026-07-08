@@ -1,12 +1,12 @@
-"""
-全局pytest配置文件。
+# 放fixture 、hook等，仅提供能力
 
-作用：
-1. pytest运行时自动识别本文件所在目录为项目根目录，加入模块搜索路径。
-2. 定义跨测试文件共用的fixture(auth_service、auth_token、customer_service)。
-
-数据加载相关的工具函数，见 utils/data_loader.py
-"""
+# 常见 fixture：
+# login / token
+# client 初始化
+# service 初始化
+# headers
+# test user
+# test data setup
 import pytest
 
 from services.auth_service import AuthService

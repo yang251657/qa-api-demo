@@ -1,14 +1,14 @@
+"""
+模拟CRM系统的客户管理接口封装。
+使用 reqres.in 的 /users 接口模拟"查客户信息"场景。
+token通过构造函数注入，401时自动刷新token并重试一次。
+"""
 from clients.http_client import HttpClient
 from config.settings import BASE_URL
 from services.auth_service import AuthService
 
 
 class CustomerService:
-    """
-    模拟CRM系统的客户管理接口。
-    token 通过构造函数传入；如果请求返回401(token失效)，
-    会自动重新登录一次并重试原请求一次。
-    """
 
     def __init__(self, token: str = None):
         self.client = HttpClient(BASE_URL)
@@ -18,25 +18,21 @@ class CustomerService:
         return {"Authorization": f"Bearer {self.token}"} if self.token else {}
 
     def _refresh_token(self):
-        """token失效时，重新登录拿新token"""
         auth = AuthService()
         response = auth.login("eve.holt@reqres.in", "cityslicka")
         self.token = response.json().get("token")
 
+    def _get_with_retry(self, path: str, params: dict = None):
+        response = self.client.get(path, params=params, extra_headers=self._auth_headers())
+
+        if response.status_code == 401:
+            self._refresh_token()
+            response = self.client.get(path, params=params, extra_headers=self._auth_headers())
+
+        return response
+
     def get_customer(self, customer_id):
-        response = self.client.get(f"/users/{customer_id}", extra_headers=self._auth_headers())
+        return self._get_with_retry(f"/users/{customer_id}")
 
-        if response.status_code == 401:
-            self._refresh_token()
-            response = self.client.get(f"/users/{customer_id}", extra_headers=self._auth_headers())
-
-        return response
-
-    def get_customer_list(self, page=1):
-        response = self.client.get("/users", params={"page": page}, extra_headers=self._auth_headers())
-
-        if response.status_code == 401:
-            self._refresh_token()
-            response = self.client.get("/users", params={"page": page}, extra_headers=self._auth_headers())
-
-        return response
+    def get_customer_list(self, page: int = 1):
+        return self._get_with_retry("/users", params={"page": page})

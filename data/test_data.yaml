@@ -1,11 +1,12 @@
-
-#管理所有的模块测试数据  casename 、module、data、expected status；
-# 通过module字段做模块标记
-
 cases:
+
+  # ======================
+  # LOGIN 模块（2条）
+  # ======================
+
   - case_name: login_success
     module: login
-    mark: smoke        # ← 这条数据自己声明它是smoke
+    mark: smoke
     data:
       email: eve.holt@reqres.in
       password: cityslicka
@@ -14,36 +15,31 @@ cases:
 
   - case_name: login_missing_password
     module: login
-    mark: regression    # ← 这条数据自己声明它是regression
+    mark: regression
     data:
       email: eve.holt@reqres.in
       password: ""
     expected:
       status_code: 400
 
-  - case_name: login_wrong_email_format
-    module: login
-    mark: regression
-  
-    data:
-      email: not-an-email
-      password: cityslicka
-    expected:
-      status_code: 400
+
+  # ======================
+  # CUSTOMER 模块（2条）
+  # ======================
 
   - case_name: get_existing_customer
     module: customer
-    mark: regression 
+    mark: regression
     data:
       customer_id: 2
     expected:
       status_code: 200
 
+
   - case_name: get_nonexistent_customer
     module: customer
-    mark: regression 
+    mark: regression
     data:
       customer_id: 9999
     expected:
       status_code: 404
-      

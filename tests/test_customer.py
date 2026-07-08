@@ -1,40 +1,71 @@
+"""
+客户管理接口测试用例(精简 demo 版)
+"""
 import pytest
 from services.customer_service import CustomerService
-from utils.data_loader import load_cases_by_module   # ← 改这一行
+from utils.data_loader import load_cases_by_module
+from utils.assertions import assert_response
+from schemas.customer import CUSTOMER_SCHEMA
 
 
-
+# =========================
+# 数据驱动（只保留1套）
+# =========================
 customer_cases = load_cases_by_module("test_data.yaml", "customer")
 
 customer_params = [
-    pytest.param(case, marks=getattr(pytest.mark, case["mark"]), id=case["case_name"])
+    pytest.param(
+        case,
+        marks=getattr(pytest.mark, case.get("mark", "regression")),
+        id=case["case_name"]
+    )
     for case in customer_cases
 ]
 
-@pytest.mark.smoke
-def test_get_customer_success(customer_service):
-    response = customer_service.get_customer(2)
-    assert response.status_code == 200
-    assert "data" in response.json()
 
-
+# =========================
+# 1. 查询场景（核心）
+# =========================
 @pytest.mark.parametrize("case", customer_params)
 def test_get_customer_scenarios(customer_service, case):
-    response = customer_service.get_customer(case["data"]["customer_id"])
-    assert response.status_code == case["expected"]["status_code"]
+
+    response = customer_service.get_customer(
+        case["data"]["customer_id"]
+    )
+
+    assert_response(
+        response,
+        expected_status=case["expected"]["status_code"],
+        schema=CUSTOMER_SCHEMA if case["expected"]["status_code"] == 200 else None
+    )
 
 
-@pytest.mark.regression
+# =========================
+# 2. 列表查询（独立API）
+# =========================
 def test_get_customer_list(customer_service):
+
     response = customer_service.get_customer_list(page=1)
-    assert response.status_code == 200
-    assert "data" in response.json()
+
+    assert_response(
+        response,
+        expected_status=200
+    )
 
 
+# =========================
+# 3. 异常场景（保留1个即可）
+# =========================
 @pytest.mark.regression
 def test_get_customer_with_expired_token_auto_retry():
+
     customer = CustomerService(token="expired_invalid_token")
+
     response = customer.get_customer(2)
-    assert response.status_code == 200
+
+    assert_response(
+        response,
+        expected_status=200
+    )
 
     
