@@ -1,0 +1,2 @@
+INFO     clients.http_client:http_client.py:31 请求 -> POST https://reqres.in/api/auth/login | payload={'email': 'alice2@test.com', 'password': 'pass123'}
+INFO     clients.http_client:http_client.py:33 响应 <- 201 | body={"email":"alice2@test.com","password":"pass123","id":"885","createdAt":"2026-07-11T02:23:01.840Z"}

@@ -1,0 +1,4 @@
+INFO     clients.http_client:http_client.py:31 请求 -> POST https://reqres.in/api/auth/login | payload={'email': 'alice2@test.com', 'password': 'pass123'}
+INFO     clients.http_client:http_client.py:33 响应 <- 201 | body={"email":"alice2@test.com","password":"pass123","id":"842","createdAt":"2026-07-11T02:23:01.025Z"}
+INFO     clients.http_client:http_client.py:31 请求 -> POST https://reqres.in/api/customer | payload={'name': 'Test Customer', 'email': 'testcustomer2@example.com', 'phone': '021-123-4567', 'company': 'Test Corp'}
+INFO     clients.http_client:http_client.py:33 响应 <- 201 | body={"name":"Test Customer","email":"testcustomer2@example.com","phone":"021-123-4567","company":"Test Corp","id":"749","createdAt":"2026-07-11T02:23:01.152Z"}

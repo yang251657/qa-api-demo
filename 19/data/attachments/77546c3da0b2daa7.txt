@@ -1,2 +1,0 @@
-INFO     clients.http_client:http_client.py:31 请求 -> POST https://reqres.in/api/login | payload={'email': 'eve.holt@reqres.in', 'password': ''}
-INFO     clients.http_client:http_client.py:33 响应 <- 400 | body={"error":"Missing password"}
