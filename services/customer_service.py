@@ -14,28 +14,18 @@ class CustomerService:
 
     def _refresh_token(self):
         auth = AuthService()
-        response = auth.login("eve.holt@reqres.in", "cityslicka")
+        response = auth.login("alice2@test.com", "pass123")
         self.token = response.json().get("token")
 
-    def _get_with_retry(self, path: str, params: dict = None):
-        response = self.client.get(path, params=params, extra_headers=self._auth_headers())
+    def _post_with_retry(self, path: str, json: dict = None):
+        response = self.client.post(path, json=json, extra_headers=self._auth_headers())
 
         if response.status_code == 401:
             self._refresh_token()
-            response = self.client.get(path, params=params, extra_headers=self._auth_headers())
+            response = self.client.post(path, json=json, extra_headers=self._auth_headers())
 
         return response
 
-    def get_customer(self, customer_id):
-        return self._get_with_retry(f"/users/{customer_id}")
-
-    def get_customer_list(self, page: int = 1):
-        return self._get_with_retry("/users", params={"page": page})
-    
-
-    def create_customer(self, name: str, job: str = "QA Engineer"):
-        payload = {"name": name, "job": job}
-        return self.client.post("/users", json=payload, extra_headers=self._auth_headers())
-
-    def delete_customer(self, customer_id):
-        return self.client.delete(f"/users/{customer_id}", extra_headers=self._auth_headers())
+    def create_customer(self, name: str, email: str, phone: str = "", company: str = ""):
+        payload = {"name": name, "email": email, "phone": phone, "company": company}
+        return self._post_with_retry("/customer", json=payload)

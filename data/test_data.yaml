@@ -1,15 +1,15 @@
 cases:
 
   # ======================
-  # LOGIN 模块（2条）
+  # LOGIN 模块
   # ======================
 
   - case_name: login_success
     module: login
     mark: smoke
     data:
-      email: eve.holt@reqres.in
-      password: cityslicka
+      email: alice2@test.com
+      password: pass123
     expected:
       status_code: 200
 
@@ -17,29 +17,34 @@ cases:
     module: login
     mark: regression
     data:
-      email: eve.holt@reqres.in
+      email: alice2@test.com
       password: ""
     expected:
       status_code: 400
 
 
   # ======================
-  # CUSTOMER 模块（2条）
+  # CUSTOMER 模块
   # ======================
 
-  - case_name: get_existing_customer
+  - case_name: create_customer_success
     module: customer
-    mark: regression
+    mark: smoke
     data:
-      customer_id: 2
+      name: Test Customer
+      email: testcustomer2@example.com
+      phone: "021-123-4567"
+      company: Test Corp
     expected:
       status_code: 200
 
-
-  - case_name: get_nonexistent_customer
+  - case_name: create_customer_missing_name
     module: customer
     mark: regression
     data:
-      customer_id: 9999
+      name: ""
+      email: nocustomer@example.com
+      phone: ""
+      company: ""
     expected:
-      status_code: 404
+      status_code: 400

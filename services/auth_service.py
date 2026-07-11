@@ -10,7 +10,7 @@ class AuthService:
     
     def login(self, email, password):
         payload = {"email": email, "password": password}
-        return self.client.post("/login", json=payload)
+        return self.client.post("/auth/login", json=payload)
     
 
     
