@@ -14,7 +14,7 @@ class CustomerService:
 
     def _refresh_token(self):
         auth = AuthService()
-        response = auth.login("alice2@test.com", "pass123")
+        response = auth.login("clouduser@test.com", "cloudpass123")
         self.token = response.json().get("token")
 
     def _post_with_retry(self, path: str, json: dict = None):

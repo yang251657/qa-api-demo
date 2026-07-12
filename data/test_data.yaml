@@ -8,8 +8,8 @@ cases:
     module: login
     mark: smoke
     data:
-      email: alice2@test.com
-      password: pass123
+      email: clouduser@test.com
+      password: cloudpass123
     expected:
       status_code: 200
 
@@ -17,7 +17,7 @@ cases:
     module: login
     mark: regression
     data:
-      email: alice2@test.com
+      email: clouduser@test.com
       password: ""
     expected:
       status_code: 400

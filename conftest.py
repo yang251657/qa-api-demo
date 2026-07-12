@@ -21,7 +21,7 @@ def auth_service():
 @pytest.fixture(scope="session")
 def auth_token():
     auth = AuthService()
-    response = auth.login("alice2@test.com", "pass123")
+    response = auth.login("clouduser@test.com", "cloudpass123")
     return response.json().get("token")
 
 
