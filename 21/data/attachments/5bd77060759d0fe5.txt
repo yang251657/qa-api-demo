@@ -1,8 +1,0 @@
-INFO     clients.http_client:http_client.py:31 请求 -> POST http://crm-backend-net-env.eba-jbstp38t.ap-southeast-2.elasticbeanstalk.com/api/auth/login | payload={'email': 'alice2@test.com', 'password': 'pass123'}
-INFO     clients.http_client:http_client.py:33 响应 <- 401 | body={"message":"Invalid email or password"}
-INFO     clients.http_client:http_client.py:31 请求 -> POST http://crm-backend-net-env.eba-jbstp38t.ap-southeast-2.elasticbeanstalk.com/api/customer | payload={'name': 'Test Customer', 'email': 'testcustomer2@example.com', 'phone': '021-123-4567', 'company': 'Test Corp'}
-INFO     clients.http_client:http_client.py:33 响应 <- 401 | body=
-INFO     clients.http_client:http_client.py:31 请求 -> POST http://crm-backend-net-env.eba-jbstp38t.ap-southeast-2.elasticbeanstalk.com/api/auth/login | payload={'email': 'alice2@test.com', 'password': 'pass123'}
-INFO     clients.http_client:http_client.py:33 响应 <- 401 | body={"message":"Invalid email or password"}
-INFO     clients.http_client:http_client.py:31 请求 -> POST http://crm-backend-net-env.eba-jbstp38t.ap-southeast-2.elasticbeanstalk.com/api/customer | payload={'name': 'Test Customer', 'email': 'testcustomer2@example.com', 'phone': '021-123-4567', 'company': 'Test Corp'}
-INFO     clients.http_client:http_client.py:33 响应 <- 401 | body=

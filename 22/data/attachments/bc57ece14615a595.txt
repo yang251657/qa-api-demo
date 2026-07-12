@@ -1,0 +1,2 @@
+2026-07-12 00:17:01 [INFO] 请求 -> POST http://crm-backend-net-env.eba-jbstp38t.ap-southeast-2.elasticbeanstalk.com/api/customer | payload={'name': '', 'email': 'nocustomer@example.com', 'phone': '', 'company': ''}
+2026-07-12 00:17:01 [INFO] 响应 <- 400 | body={"message":"Name and email are required"}
