@@ -1,2 +1,0 @@
-INFO     clients.http_client:http_client.py:31 请求 -> POST https://reqres.in/api/customer | payload={'name': 'Retry Test Customer', 'email': 'retrytest@example.com', 'phone': '', 'company': ''}
-INFO     clients.http_client:http_client.py:33 响应 <- 201 | body={"name":"Retry Test Customer","email":"retrytest@example.com","phone":"","company":"","id":"251","createdAt":"2026-07-11T02:23:01.632Z"}

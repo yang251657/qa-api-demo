@@ -1,6 +1,0 @@
-"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
-"","202","test_login_scenarios[login_success]","tests","2026-07-11","failed","2026-07-11","","test_login","",""
-"故意用无效token，验证401后能自动刷新并重试成功","225","test_create_customer_with_expired_token_auto_retry","tests","2026-07-11","failed","2026-07-11","","test_customer","",""
-"","214","test_create_customer_scenarios[create_customer_missing_name]","tests","2026-07-11","failed","2026-07-11","","test_customer","",""
-"","212","test_login_scenarios[login_missing_password]","tests","2026-07-11","failed","2026-07-11","","test_login","",""
-"","125","test_create_customer_scenarios[create_customer_success]","tests","2026-07-11","failed","2026-07-11","","test_customer","",""

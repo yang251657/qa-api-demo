@@ -1,0 +1,2 @@
+2026-07-12 00:09:46 [INFO] 请求 -> POST http://crm-backend-net-env.eba-jbstp38t.ap-southeast-2.elasticbeanstalk.com/api/auth/login | payload={'email': 'alice2@test.com', 'password': ''}
+2026-07-12 00:09:46 [INFO] 响应 <- 400 | body={"message":"Email and password are required"}

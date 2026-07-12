@@ -1,2 +1,0 @@
-2026-07-11 02:23:01 [INFO] 请求 -> POST https://reqres.in/api/auth/login | payload={'email': 'alice2@test.com', 'password': ''}
-2026-07-11 02:23:02 [INFO] 响应 <- 201 | body={"email":"alice2@test.com","password":"","id":"80","createdAt":"2026-07-11T02:23:02.059Z"}
