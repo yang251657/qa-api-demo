@@ -30,12 +30,8 @@ jobs:
       - name: 生成对应环境的 .env 文件
         run: |
           echo "ENV=${{ matrix.environment }}" > .env.${{ matrix.environment }}
-          echo "BASE_URL=https://reqres.in/api" >> .env.${{ matrix.environment }}
-          if [ "${{ matrix.environment }}" = "test1" ]; then
-            echo "API_KEY=${{ secrets.TEST1_API_KEY }}" >> .env.${{ matrix.environment }}
-          else
-            echo "API_KEY=${{ secrets.TEST2_API_KEY }}" >> .env.${{ matrix.environment }}
-          fi
+          echo "BASE_URL=http://crm-backend-net-env.eba-jbstp38t.ap-southeast-2.elasticbeanstalk.com/api" >> .env.${{ matrix.environment }}
+          echo "API_KEY=not-required-for-dotnet-backend" >> .env.${{ matrix.environment }}
 
       - name: 运行测试并生成报告
         env:
